@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import cs4750final.plannerapp.database.TaskDatabase
+import java.io.File
 import java.util.*
 import java.util.concurrent.Executors
 
-private const val DATABASE_NAME = "crime-database"
+private const val DATABASE_NAME = "task-database"
 
 class TaskRepository private constructor(context: Context) {
+
     private val database : TaskDatabase = Room.databaseBuilder(
         context.applicationContext,
         TaskDatabase::class.java,
@@ -18,6 +20,7 @@ class TaskRepository private constructor(context: Context) {
 
     private val taskDao = database.taskDao()
     private val executor = Executors.newSingleThreadExecutor()
+    private val filesDir = context.applicationContext.filesDir
 
     fun getTasks(): LiveData<List<Task>> = taskDao.getTasks()
     fun getTask(id: UUID): LiveData<Task?> = taskDao.getTask(id)
@@ -31,6 +34,10 @@ class TaskRepository private constructor(context: Context) {
             taskDao.addTask(task)
         }
     }
+
+    fun getPhotoFile(task: Task): File = File(filesDir,
+            task.photoFileName)
+
     companion object {
         private var INSTANCE: TaskRepository? = null
         fun initialize(context: Context) {

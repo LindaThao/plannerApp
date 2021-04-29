@@ -7,8 +7,6 @@ import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
 import java.util.Calendar.*
-
-
 private const val ARG_TIME = "time"
 
 class TimePickerFragment: DialogFragment() {

@@ -3,7 +3,9 @@
     <string name="task_title_hint">Enter a title for the task.</string>
     <string name="task_title_label">Title</string>
     <string name="task_details_label">Details</string>
-    <string name="task_solved_label">Solved</string>
+    <string name="task_detail_notes">Enter Additional Task Details</string>
+    <string name="task_completed_label">Completed</string>
+    <string name="motivational_quote">Some type of motivational quote</string>
     <string name="new_task">New Task</string>
     <string name="task_suspect_text">Choose Suspect</string>
     <string name="task_report_text">Send Task Report</string>

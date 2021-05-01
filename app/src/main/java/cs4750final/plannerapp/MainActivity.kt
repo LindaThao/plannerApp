@@ -3,6 +3,7 @@ package cs4750final.plannerapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import java.util.*
 
 private const val TAG = "MainActivity"
@@ -13,6 +14,9 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val date=intent.getStringExtra("date")
+        Log.d(TAG, "got date $date")
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (currentFragment == null) {

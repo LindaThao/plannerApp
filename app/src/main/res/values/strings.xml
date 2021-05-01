@@ -1,10 +1,22 @@
 <resources>
-    <string name="app_name">plannerApp</string>
-    <string name="task_title_hint">Enter a title for a new task.</string>
+    <string name="app_name">PlannerApp</string>
+    <string name="task_title_hint">Enter a title for the task.</string>
     <string name="task_title_label">Title</string>
     <string name="task_details_label">Details</string>
-    <string name="task_solved_label">Task Completed</string>
-    <string name="contact_police">Priority Task</string>
+    <string name="task_detail_notes">Enter Additional Task Details</string>
+    <string name="task_completed_label">Completed</string>
+    <string name="motivational_quote">Some type of motivational quote</string>
     <string name="new_task">New Task</string>
-    <string name="camera_button_label">Camera</string>
+    <string name="task_suspect_text">Choose Suspect</string>
+    <string name="task_report_text">Send Task Report</string>
+    <string name="task_report">%1$s!
+        The task was discovered on %2$s. %3$s, and %4$s
+    </string>
+    <string name="task_report_solved">The case is solved</string>
+    <string name="task_report_unsolved">The case is not solved</string>
+    <string name="task_report_no_suspect">there is no suspect.</string>
+    <string name="task_report_suspect">the suspect is %s.</string>
+    <string name="task_report_subject">PlannerApp Task Report</string>
+    <string name="send_report">Send task report via</string>
+    <string name="contact_police">CONTACT POLICE</string>
 </resources>

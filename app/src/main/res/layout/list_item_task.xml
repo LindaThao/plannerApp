@@ -11,38 +11,33 @@
         android:id="@+id/task_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Task Title"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="Crime Title"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/task_solved"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="8dp" android:textColor="@android:color/black" android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/task_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Crime Date"
-        app:layout_constraintEnd_toStartOf="@+id/task_solved"
+        android:text="Task Date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_title" />
-
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/task_title"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/task_solved"
+        android:layout_marginEnd="8dp"/>
     <ImageView
-        android:id="@+id/task_solved"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        app:srcCompat="@drawable/ic_solved"
+        android:id="@+id/task_solved" android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="@+id/task_title"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521"
-        app:srcCompat="@drawable/ic_solved" />
+        android:layout_marginEnd="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

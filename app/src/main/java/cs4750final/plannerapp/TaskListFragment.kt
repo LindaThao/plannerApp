@@ -1,11 +1,13 @@
 package cs4750final.plannerapp
 
 import android.content.Context
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.*
 import android.view.View
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -68,6 +70,7 @@ class TaskListFragment : Fragment() {
                     }
                 }
         )
+
     }
 
     override fun onDetach() {
@@ -108,17 +111,36 @@ class TaskListFragment : Fragment() {
 
         private val titleTextView: TextView = itemView.findViewById(R.id.task_title)
         private val dateTextView: TextView = itemView.findViewById(R.id.task_date)
-        private val solvedImageView: ImageView = itemView.findViewById(R.id.task_solved)
+//        private val solvedCheckbox: CheckBox = itemView.findViewById(R.id.task_done)
+//        private val solvedImageView: ImageView = itemView.findViewById(R.id.task_solved)
 
         init {
             itemView.setOnClickListener(this)
-        }
+//            solvedCheckbox.setOnCheckedChangeListener { _, isChecked ->
+//                task.isSolved = isChecked
+//                Log.i(TAG, "Task: $task.isSolved")
 
+//                taskListViewModel.taskListLiveData.observe(
+//                    viewLifecycleOwner,
+//                    Observer { tasks ->
+//                        tasks?.let {
+//                            updateUI(tasks)
+//                        }
+//                    }
+//                )
+//            }
+
+        }
         fun bind(task: Task) {
             this.task = task
             titleTextView.text = this.task.title
             dateTextView.text = this.task.date.toString()
-            solvedImageView.visibility = if (task.isSolved) {
+//            solvedCheckbox.isChecked  = false
+//            solvedImageView.visibility =
+                if (task.isSolved) {
+//                solvedCheckbox.isChecked = true
+                titleTextView.paintFlags = titleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                dateTextView.paintFlags = dateTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 View.VISIBLE
             } else {
                 View.GONE
@@ -127,6 +149,12 @@ class TaskListFragment : Fragment() {
 
         override fun onClick(v: View) {
             callbacks?.onTaskSelected(task.id)
+//            solvedCheckbox.setOnCheckedChangeListener { _, isChecked ->
+//                task.isSolved = isChecked
+//                Log.i(TAG, "Task: $task.isSolved")
+//
+////                updateUI(tasks)
+//            }
         }
     }
 

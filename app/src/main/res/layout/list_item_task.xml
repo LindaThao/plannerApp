@@ -7,6 +7,16 @@
     android:layout_height="wrap_content"
     tools:layout_editor_absoluteY="81dp">
 
+<!--    <CheckBox-->
+<!--        android:id="@+id/task_done"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="72dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.476" />-->
+
     <TextView
         android:id="@+id/task_title"
         android:layout_width="0dp"
@@ -30,14 +40,14 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/task_solved"
         android:layout_marginEnd="8dp"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_solved"
-        android:id="@+id/task_solved" android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="@+id/task_title"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="8dp"/>
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:srcCompat="@drawable/ic_solved"-->
+<!--        android:id="@+id/task_solved" android:layout_marginTop="8dp"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/task_title"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginEnd="8dp"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

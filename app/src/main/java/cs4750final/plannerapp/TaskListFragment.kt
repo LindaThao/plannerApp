@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
 import java.util.*
 
 private const val TAG = "TaskListFragment"
@@ -134,7 +135,9 @@ class TaskListFragment : Fragment() {
         fun bind(task: Task) {
             this.task = task
             titleTextView.text = this.task.title
-            dateTextView.text = this.task.date.toString()
+            val timeString = SimpleDateFormat("hh:mm a")
+                .format(this.task.date)
+            dateTextView.text = timeString
 //            solvedCheckbox.isChecked  = false
 //            solvedImageView.visibility =
                 if (task.isSolved) {

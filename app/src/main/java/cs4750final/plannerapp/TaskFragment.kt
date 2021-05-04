@@ -36,8 +36,13 @@ private const val REQUEST_DATE = 0
 private const val REQUEST_CONTACT = 1
 private const val REQUEST_PHOTO = 2
 private const val DATE_FORMAT = "EEE, MMM, dd"
+private const val DIALOG_TIME = "DialogTime"
+private const val REQUEST_TIME = 3
 
-class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
+class TaskFragment : Fragment(),
+        DatePickerFragment.Callbacks,
+        TimePickerFragment.Callbacks
+{
 
     private lateinit var task: Task
     private lateinit var photoFile: File
@@ -49,6 +54,8 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var suspectButton: Button
     private lateinit var photoButton: ImageButton
     private lateinit var photoView: ImageView
+    private lateinit var timeButton: Button
+
     private val taskDetailViewModel: TaskDetailViewModel by lazy {
         ViewModelProviders.of(this).get(TaskDetailViewModel::class.java)
     }
@@ -70,10 +77,11 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
         titleField = view.findViewById(R.id.task_title) as EditText
         dateButton = view.findViewById(R.id.task_date) as Button
         solvedCheckBox = view.findViewById(R.id.task_solved) as CheckBox
-        reportButton = view.findViewById(R.id.task_report) as Button
-        suspectButton = view.findViewById(R.id.task_suspect) as Button
+//        reportButton = view.findViewById(R.id.task_report) as Button
+//        suspectButton = view.findViewById(R.id.task_suspect) as Button
         photoButton = view.findViewById(R.id.task_camera) as ImageButton
         photoView = view.findViewById(R.id.task_photo) as ImageView
+        timeButton = view.findViewById(R.id.task_time) as Button
 
         return view
     }
@@ -138,36 +146,36 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
             }
         }
 
-        reportButton.setOnClickListener {
-            Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, getTaskReport())
-                putExtra(
-                        Intent.EXTRA_SUBJECT,
-                        getString(R.string.task_report_subject))
-            }.also { intent ->
-                val chooserIntent =
-                        Intent.createChooser(intent, getString(R.string.send_report))
-                startActivity(chooserIntent)
-            }
-        }
-
-        suspectButton.apply {
-            val pickContactIntent =
-                    Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-
-            setOnClickListener {
-                startActivityForResult(pickContactIntent, REQUEST_CONTACT)
-            }
-
-            val packageManager: PackageManager = requireActivity().packageManager
-            val resolvedActivity: ResolveInfo? =
-                    packageManager.resolveActivity(pickContactIntent,
-                            PackageManager.MATCH_DEFAULT_ONLY)
-            if (resolvedActivity == null) {
-                isEnabled = false
-            }
-        }
+//        reportButton.setOnClickListener {
+//            Intent(Intent.ACTION_SEND).apply {
+//                type = "text/plain"
+//                putExtra(Intent.EXTRA_TEXT, getTaskReport())
+//                putExtra(
+//                        Intent.EXTRA_SUBJECT,
+//                        getString(R.string.task_report_subject))
+//            }.also { intent ->
+//                val chooserIntent =
+//                        Intent.createChooser(intent, getString(R.string.send_report))
+//                startActivity(chooserIntent)
+//            }
+//        }
+//
+//        suspectButton.apply {
+//            val pickContactIntent =
+//                    Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+//
+//            setOnClickListener {
+//                startActivityForResult(pickContactIntent, REQUEST_CONTACT)
+//            }
+//
+//            val packageManager: PackageManager = requireActivity().packageManager
+//            val resolvedActivity: ResolveInfo? =
+//                    packageManager.resolveActivity(pickContactIntent,
+//                            PackageManager.MATCH_DEFAULT_ONLY)
+//            if (resolvedActivity == null) {
+//                isEnabled = false
+//            }
+//        }
 
         photoButton.apply {
             val packageManager: PackageManager = requireActivity().packageManager
@@ -198,6 +206,12 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
                 startActivityForResult(captureImage, REQUEST_PHOTO)
             }
         }
+        timeButton.setOnClickListener {
+            TimePickerFragment.newInstance(task.date).apply {
+                setTargetFragment(this@TaskFragment, REQUEST_TIME)
+                show(this@TaskFragment.requireFragmentManager(), DIALOG_TIME)
+            }
+        }
     }
 
     override fun onStop() {
@@ -216,7 +230,10 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
         task.date = date
         updateUI()
     }
-
+    override fun onTimeSelected(date: Date) {
+        task.date = date
+        updateUI()
+    }
     private fun updateUI() {
         titleField.setText(task.title)
         dateButton.text = task.date.toString()
@@ -224,9 +241,13 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
             isChecked = task.isSolved
             jumpDrawablesToCurrentState()
         }
-        if (task.suspect.isNotEmpty()) {
-            suspectButton.text = task.suspect
-        }
+        val time = SimpleDateFormat("hh:mm a")
+                .format(task.date)
+        timeButton.text = time
+        task.dueTime = time
+//        if (task.suspect.isNotEmpty()) {
+//            suspectButton.text = task.suspect
+//        }
         updatePhotoView()
     }
 
@@ -261,10 +282,10 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
                     // Pull out the first column of the first row of data -
                     // that is your suspect's name.
                     it.moveToFirst()
-                    val suspect = it.getString(0)
-                    task.suspect = suspect
-                    taskDetailViewModel.saveTask(task)
-                    suspectButton.text = suspect
+//                    val suspect = it.getString(0)
+//                    task.suspect = suspect
+//                    taskDetailViewModel.saveTask(task)
+//                    suspectButton.text = suspect
                 }
             }
 

@@ -10,11 +10,14 @@ import java.util.*
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM task")
+    @Query("SELECT * FROM task ORDER BY NOT isSolved DESC, date")
     fun getTasks(): LiveData<List<Task>>
 
     @Query("SELECT * FROM task WHERE id=(:id)")
     fun getTask(id: UUID): LiveData<Task?>
+
+    @Query("SELECT * FROM task ORDER BY date DESC")
+    fun getTasksByDatetime(): LiveData<List<Task>>
 
     @Update
     fun updateTask(task: Task)

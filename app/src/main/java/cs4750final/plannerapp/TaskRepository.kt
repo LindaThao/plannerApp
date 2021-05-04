@@ -3,6 +3,8 @@ package cs4750final.plannerapp
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import cs4750final.plannerapp.database.TaskDatabase
 import java.io.File
 import java.util.*
@@ -12,11 +14,14 @@ private const val DATABASE_NAME = "task-database"
 
 class TaskRepository private constructor(context: Context) {
 
-    private val database : TaskDatabase = Room.databaseBuilder(
-        context.applicationContext,
-        TaskDatabase::class.java,
-        DATABASE_NAME
-    ).build()
+    private val database: TaskDatabase = Room.databaseBuilder(
+            context.applicationContext,
+            TaskDatabase::class.java,
+            DATABASE_NAME
+    )
+            .addMigrations(MIGRATION_1_2)
+            .build()
+
 
     private val taskDao = database.taskDao()
     private val executor = Executors.newSingleThreadExecutor()
@@ -29,6 +34,7 @@ class TaskRepository private constructor(context: Context) {
             taskDao.updateTask(task)
         }
     }
+
     fun addTask(task: Task) {
         executor.execute {
             taskDao.addTask(task)
@@ -45,9 +51,17 @@ class TaskRepository private constructor(context: Context) {
                 INSTANCE = TaskRepository(context)
             }
         }
+
         fun get(): TaskRepository {
-            return INSTANCE ?:
-            throw IllegalStateException("TaskRepository must be initialized")
+            return INSTANCE ?: throw IllegalStateException("TaskRepository must be initialized")
         }
+    }
+}
+
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+                "ALTER TABLE Task ADD COLUMN dueTime TEXT NOT NULL DEFAULT ''"
+        )
     }
 }

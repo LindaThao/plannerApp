@@ -85,15 +85,20 @@
         android:layout_height="wrap_content"
         android:text="@string/task_completed_label"/>
 
-    <Button
-        android:id="@+id/task_suspect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/task_suspect_text"/>
+<!--    <Button-->
+<!--        android:id="@+id/task_suspect"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/task_suspect_text"/>-->
 
+<!--    <Button-->
+<!--        android:id="@+id/task_report"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/task_report_text"/>-->
     <Button
-        android:id="@+id/task_report"
+        android:id="@+id/task_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/task_report_text"/>
+        tools:text="10:00" />
 </LinearLayout>

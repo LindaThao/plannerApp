@@ -36,26 +36,20 @@ private const val REQUEST_DATE = 0
 private const val REQUEST_CONTACT = 1
 private const val REQUEST_PHOTO = 2
 private const val DATE_FORMAT = "EEE, MMM, dd"
-private const val DIALOG_TIME = "DialogTime"
-private const val REQUEST_TIME = 3
 
-class TaskFragment : Fragment(),
-        DatePickerFragment.Callbacks,
-        TimePickerFragment.Callbacks
-{
+class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
 
     private lateinit var task: Task
     private lateinit var photoFile: File
     private lateinit var photoUri: Uri
     private lateinit var titleField: EditText
+    private lateinit var detailsField: EditText
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
-    private lateinit var reportButton: Button
-    private lateinit var suspectButton: Button
+//    private lateinit var reportButton: Button
+//    private lateinit var suspectButton: Button
     private lateinit var photoButton: ImageButton
     private lateinit var photoView: ImageView
-    private lateinit var timeButton: Button
-
     private val taskDetailViewModel: TaskDetailViewModel by lazy {
         ViewModelProviders.of(this).get(TaskDetailViewModel::class.java)
     }
@@ -75,13 +69,13 @@ class TaskFragment : Fragment(),
         val view = inflater.inflate(R.layout.fragment_task, container, false)
 
         titleField = view.findViewById(R.id.task_title) as EditText
+        detailsField = view.findViewById(R.id.task_detail) as EditText
         dateButton = view.findViewById(R.id.task_date) as Button
         solvedCheckBox = view.findViewById(R.id.task_solved) as CheckBox
 //        reportButton = view.findViewById(R.id.task_report) as Button
 //        suspectButton = view.findViewById(R.id.task_suspect) as Button
         photoButton = view.findViewById(R.id.task_camera) as ImageButton
         photoView = view.findViewById(R.id.task_photo) as ImageView
-        timeButton = view.findViewById(R.id.task_time) as Button
 
         return view
     }
@@ -133,6 +127,32 @@ class TaskFragment : Fragment(),
         }
         titleField.addTextChangedListener(titleWatcher)
 
+        val detailWatcher = object : TextWatcher {
+            override fun beforeTextChanged(
+                    sequence: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+            ) {
+                // This space intentionally left blank
+            }
+
+            override fun onTextChanged(
+                    sequence: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+            ) {
+                task.details = sequence.toString()
+            }
+
+            override fun afterTextChanged(sequence: Editable?) {
+                // This one too
+            }
+        }
+
+        detailsField.addTextChangedListener(detailWatcher)
+
         solvedCheckBox.apply {
             setOnCheckedChangeListener { _, isChecked ->
                 task.isSolved = isChecked
@@ -145,7 +165,7 @@ class TaskFragment : Fragment(),
                 show(this@TaskFragment.requireFragmentManager(), DIALOG_DATE)
             }
         }
-
+//
 //        reportButton.setOnClickListener {
 //            Intent(Intent.ACTION_SEND).apply {
 //                type = "text/plain"
@@ -159,7 +179,7 @@ class TaskFragment : Fragment(),
 //                startActivity(chooserIntent)
 //            }
 //        }
-//
+
 //        suspectButton.apply {
 //            val pickContactIntent =
 //                    Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
@@ -206,12 +226,6 @@ class TaskFragment : Fragment(),
                 startActivityForResult(captureImage, REQUEST_PHOTO)
             }
         }
-        timeButton.setOnClickListener {
-            TimePickerFragment.newInstance(task.date).apply {
-                setTargetFragment(this@TaskFragment, REQUEST_TIME)
-                show(this@TaskFragment.requireFragmentManager(), DIALOG_TIME)
-            }
-        }
     }
 
     override fun onStop() {
@@ -230,21 +244,15 @@ class TaskFragment : Fragment(),
         task.date = date
         updateUI()
     }
-    override fun onTimeSelected(date: Date) {
-        task.date = date
-        updateUI()
-    }
+
     private fun updateUI() {
         titleField.setText(task.title)
+        detailsField.setText(task.details)
         dateButton.text = task.date.toString()
         solvedCheckBox.apply {
             isChecked = task.isSolved
             jumpDrawablesToCurrentState()
         }
-        val time = SimpleDateFormat("hh:mm a")
-                .format(task.date)
-        timeButton.text = time
-        task.dueTime = time
 //        if (task.suspect.isNotEmpty()) {
 //            suspectButton.text = task.suspect
 //        }

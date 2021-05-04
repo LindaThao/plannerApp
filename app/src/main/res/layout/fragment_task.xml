@@ -43,7 +43,17 @@
                 style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/motivational_quote"/>
+                android:text="@string/daily_challenge_label"
+                android:textAlignment="center"
+                android:textColor="#2196F3" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/daily_challenge_instructions"
+                android:textAlignment="center"
+                android:textColor="#673AB7" />
 
 
         </LinearLayout>
@@ -53,7 +63,10 @@
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/task_title_label"/>
+        android:text="@string/task_title_label"
+        android:textAlignment="viewStart"
+        android:textColor="#2196F3"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/task_title"
@@ -65,13 +78,23 @@
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/task_details_label"/>
+        android:text="@string/task_details_label"
+        android:textColor="#2196F3"
+        android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/task_detail_notes"
+        android:id="@+id/task_detail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="@string/task_detail_notes"/>
+
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/due_date_label"
+        android:textColor="#2196F3"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/task_date"
@@ -96,9 +119,4 @@
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="@string/task_report_text"/>-->
-    <Button
-        android:id="@+id/task_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="10:00" />
 </LinearLayout>

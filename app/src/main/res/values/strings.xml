@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">PlannerApp</string>
     <string name="task_title_hint">Enter a title for the task.</string>
-    <string name="task_title_label">Title</string>
-    <string name="task_details_label">Details</string>
+    <string name="task_title_label">Task Title</string>
+    <string name="task_details_label">Task Details</string>
     <string name="task_detail_notes">Enter Additional Task Details</string>
-    <string name="task_completed_label">Completed</string>
-    <string name="motivational_quote">Some type of motivational quote</string>
+    <string name="due_date_label">Due Date and Time</string>
+    <string name="task_completed_label">Task Completed</string>
+    <string name="daily_challenge_label">Daily Photo Challege</string>
+    <string name="daily_challenge_instructions">Take A Photo of Something that Makes You Happy</string>
+    <string name="motivation_quote">"Because the ones who are crazy enough to think that they can change the world are the ones who do"    - Steve Jobs</string>
     <string name="new_task">New Task</string>
     <string name="task_suspect_text">Choose Suspect</string>
     <string name="task_report_text">Send Task Report</string>

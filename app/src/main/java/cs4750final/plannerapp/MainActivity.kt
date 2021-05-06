@@ -1,5 +1,7 @@
 package cs4750final.plannerapp
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +9,7 @@ import android.widget.Toast
 import java.util.*
 
 private const val TAG = "MainActivity"
+private const val SELECTED_DATE = "cs4750final.plannerapp.selected_date"
 
 class MainActivity : AppCompatActivity(),
     TaskListFragment.Callbacks {
@@ -35,5 +38,15 @@ class MainActivity : AppCompatActivity(),
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    companion object {
+        fun newIntent(packageContext: Context, selectedDate: String):
+                Intent {
+            return Intent(packageContext,
+                    MainActivity::class.java).apply {
+                putExtra(SELECTED_DATE, selectedDate)
+            }
+        }
     }
 }

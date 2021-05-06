@@ -3,10 +3,12 @@ package cs4750final.plannerapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.CalendarView
-import android.widget.Toast
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
-class CalendarActivity : AppCompatActivity() {
+private const val REQUEST_CODE_CHEAT = 0
+
+class CalendarActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +20,7 @@ class CalendarActivity : AppCompatActivity() {
             val date = "$temp/$dayOfMonth/$year"
             val intent = Intent(this@CalendarActivity, MainActivity::class.java)
             intent.putExtra("date", date)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_CHEAT)
         }
     }
 }

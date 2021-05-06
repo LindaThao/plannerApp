@@ -46,6 +46,7 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var detailsField: EditText
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
+    private lateinit var priorityCheckBox: CheckBox
 //    private lateinit var reportButton: Button
 //    private lateinit var suspectButton: Button
     private lateinit var photoButton: ImageButton
@@ -72,6 +73,7 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
         detailsField = view.findViewById(R.id.task_detail) as EditText
         dateButton = view.findViewById(R.id.task_date) as Button
         solvedCheckBox = view.findViewById(R.id.task_solved) as CheckBox
+        priorityCheckBox = view.findViewById(R.id.priority_task) as CheckBox
 //        reportButton = view.findViewById(R.id.task_report) as Button
 //        suspectButton = view.findViewById(R.id.task_suspect) as Button
         photoButton = view.findViewById(R.id.task_camera) as ImageButton
@@ -156,6 +158,12 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
         solvedCheckBox.apply {
             setOnCheckedChangeListener { _, isChecked ->
                 task.isSolved = isChecked
+            }
+        }
+
+        priorityCheckBox.apply {
+            setOnCheckedChangeListener { _, isChecked ->
+                task.isPriority = isChecked
             }
         }
 
@@ -251,6 +259,10 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
         dateButton.text = task.date.toString()
         solvedCheckBox.apply {
             isChecked = task.isSolved
+            jumpDrawablesToCurrentState()
+        }
+        priorityCheckBox.apply {
+            isChecked = task.isPriority
             jumpDrawablesToCurrentState()
         }
 //        if (task.suspect.isNotEmpty()) {

@@ -108,6 +108,12 @@
         android:layout_height="wrap_content"
         android:text="@string/task_completed_label"/>
 
+    <CheckBox
+        android:id="@+id/priority_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/priority_task_label"/>
+
 <!--    <Button-->
 <!--        android:id="@+id/task_suspect"-->
 <!--        android:layout_width="match_parent"-->

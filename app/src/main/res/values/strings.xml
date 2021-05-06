@@ -6,6 +6,7 @@
     <string name="task_detail_notes">Enter Additional Task Details</string>
     <string name="due_date_label">Due Date and Time</string>
     <string name="task_completed_label">Task Completed</string>
+    <string name="priority_task_label">Priority Task</string>
     <string name="daily_challenge_label">Daily Photo Challege</string>
     <string name="daily_challenge_instructions">Take A Photo of Something that Makes You Happy</string>
     <string name="motivation_quote">"Because the ones who are crazy enough to think that they can change the world are the ones who do"    - Steve Jobs</string>

@@ -1,6 +1,7 @@
 package cs4750final.plannerapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.text.format.DateFormat
@@ -35,6 +36,7 @@ class TaskListFragment : Fragment() {
         fun onTaskSelected(taskId: UUID)
     }
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?
@@ -50,6 +52,7 @@ class TaskListFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        val selectedDate = arguments?.getStringArrayList(ARG_NAME)
         val view = inflater.inflate(R.layout.fragment_task_list, container, false)
 
         taskRecyclerView =
@@ -112,6 +115,7 @@ class TaskListFragment : Fragment() {
 
         private val titleTextView: TextView = itemView.findViewById(R.id.task_title)
         private val dateTextView: TextView = itemView.findViewById(R.id.task_date)
+        private val priorityImageView: ImageView = itemView.findViewById(R.id.priority_task)
 //        private val solvedCheckbox: CheckBox = itemView.findViewById(R.id.task_done)
 //        private val solvedImageView: ImageView = itemView.findViewById(R.id.task_solved)
 
@@ -130,20 +134,27 @@ class TaskListFragment : Fragment() {
 //                    }
 //                )
 //            }
-
         }
+
         fun bind(task: Task) {
             this.task = task
             titleTextView.text = this.task.title
             val timeString = SimpleDateFormat("hh:mm a")
-                .format(this.task.date)
+                    .format(this.task.date)
             dateTextView.text = timeString
 //            solvedCheckbox.isChecked  = false
 //            solvedImageView.visibility =
-                if (task.isSolved) {
+            if (task.isSolved) {
 //                solvedCheckbox.isChecked = true
                 titleTextView.paintFlags = titleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 dateTextView.paintFlags = dateTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+
+            priorityImageView.visibility =
+            if (task.isPriority) {
                 View.VISIBLE
             } else {
                 View.GONE
@@ -180,8 +191,32 @@ class TaskListFragment : Fragment() {
     }
 
     companion object {
+        const val ARG_NAME = "selectedDate"
+
         fun newInstance(): TaskListFragment {
             return TaskListFragment()
         }
+
+
+//   Testing this code to see if it can connect two sides (calendar and selected date) - Pending
+//    companion object {
+//        const val ARG_NAME = "selectedDate"
+//
+//        fun newInstance(): TaskListFragment {
+//            return TaskListFragment()
+//        }
+//
+//        fun newInstance(selectedDate: String?): TaskListFragment {
+//            val fragment = TaskListFragment()
+//
+//            val bundle = Bundle().apply {
+//                putString(ARG_NAME, selectedDate)
+//            }
+//
+//            fragment.arguments = bundle
+//
+//            return fragment
+//        }
+//    }
     }
 }

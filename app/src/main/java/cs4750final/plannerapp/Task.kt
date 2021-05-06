@@ -11,6 +11,7 @@ data class Task(@PrimaryKey
                  var details: String = "",
                  var date: Date = Date(),
                  var isSolved: Boolean = false,
+                 var isPriority: Boolean = false,
                  var suspect: String = ""
 //    var requiresPolice: Boolean = false
 ) {

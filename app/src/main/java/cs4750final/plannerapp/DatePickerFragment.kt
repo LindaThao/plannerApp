@@ -19,9 +19,10 @@ class DatePickerFragment : DialogFragment() {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val min = calendar.get(Calendar.MINUTE)
 
+        //val cal : Calendar = Calendar()
         val dateListener = DatePickerDialog.OnDateSetListener {
                 _: DatePicker, year: Int, month: Int, day: Int ->
-            val resultDate : Date = GregorianCalendar(year, month, day, hour, min).time
+            val resultDate : Date = Date(year, month, day)
             targetFragment?.let { fragment ->
                 (fragment as Callbacks).onDateSelected(resultDate)
             }

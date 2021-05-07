@@ -16,6 +16,10 @@ interface TaskDao {
     @Query("SELECT * FROM task WHERE id=(:id)")
     fun getTask(id: UUID): LiveData<Task?>
 
+    //A query that matches the date provided
+    @Query("SELECT * FROM task WHERE date=(:date)")
+    fun getTaskByDate(date: Date): LiveData<List<Task>>
+
     @Query("SELECT * FROM task ORDER BY date DESC")
     fun getTasksByDatetime(): LiveData<List<Task>>
 

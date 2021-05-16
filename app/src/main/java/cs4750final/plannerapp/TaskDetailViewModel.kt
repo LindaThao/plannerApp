@@ -24,7 +24,7 @@ class TaskDetailViewModel() : ViewModel() {
         taskRepository.updateTask(task)
     }
 
-    fun getPhotoFile(crime: Task): File {
-        return taskRepository.getPhotoFile(crime)
+    fun getPhotoFile(task: Task): File {
+        return taskRepository.getPhotoFile(task)
     }
 }

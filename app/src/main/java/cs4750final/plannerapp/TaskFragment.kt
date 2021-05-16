@@ -1,11 +1,9 @@
 package cs4750final.plannerapp
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -13,7 +11,6 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateFormat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +18,9 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import java.text.SimpleDateFormat
 import java.util.*
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import java.io.File
-import java.util.jar.Manifest
 
 private const val TAG = "TaskFragment"
 private const val ARG_TASK_ID = "task_id"
@@ -47,7 +40,7 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
     private lateinit var priorityCheckBox: CheckBox
-//    private lateinit var reportButton: Button
+    private lateinit var reportButton: Button
 //    private lateinit var suspectButton: Button
     private lateinit var photoButton: ImageButton
     private lateinit var photoView: ImageView
@@ -74,7 +67,7 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
         dateButton = view.findViewById(R.id.task_date) as Button
         solvedCheckBox = view.findViewById(R.id.task_solved) as CheckBox
         priorityCheckBox = view.findViewById(R.id.priority_task) as CheckBox
-//        reportButton = view.findViewById(R.id.task_report) as Button
+        reportButton = view.findViewById(R.id.task_report) as Button
 //        suspectButton = view.findViewById(R.id.task_suspect) as Button
         photoButton = view.findViewById(R.id.task_camera) as ImageButton
         photoView = view.findViewById(R.id.task_photo) as ImageView
@@ -157,7 +150,7 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
 
         solvedCheckBox.apply {
             setOnCheckedChangeListener { _, isChecked ->
-                task.isSolved = isChecked
+                task.isCompleted = isChecked
             }
         }
 
@@ -173,20 +166,20 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
                 show(this@TaskFragment.requireFragmentManager(), DIALOG_DATE)
             }
         }
-//
-//        reportButton.setOnClickListener {
-//            Intent(Intent.ACTION_SEND).apply {
-//                type = "text/plain"
-//                putExtra(Intent.EXTRA_TEXT, getTaskReport())
-//                putExtra(
-//                        Intent.EXTRA_SUBJECT,
-//                        getString(R.string.task_report_subject))
-//            }.also { intent ->
-//                val chooserIntent =
-//                        Intent.createChooser(intent, getString(R.string.send_report))
-//                startActivity(chooserIntent)
-//            }
-//        }
+
+        reportButton.setOnClickListener {
+            Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, getTaskReport())
+                putExtra(
+                        Intent.EXTRA_SUBJECT,
+                        getString(R.string.task_report_subject))
+            }.also { intent ->
+                val chooserIntent =
+                        Intent.createChooser(intent, getString(R.string.send_report))
+                startActivity(chooserIntent)
+            }
+        }
 
 //        suspectButton.apply {
 //            val pickContactIntent =
@@ -258,7 +251,7 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
         detailsField.setText(task.details)
         dateButton.text = task.date.toString()
         solvedCheckBox.apply {
-            isChecked = task.isSolved
+            isChecked = task.isCompleted
             jumpDrawablesToCurrentState()
         }
         priorityCheckBox.apply {
@@ -319,7 +312,7 @@ class TaskFragment : Fragment(), DatePickerFragment.Callbacks {
     }
 
     private fun getTaskReport(): String {
-        val solvedString = if (task.isSolved) {
+        val solvedString = if (task.isCompleted) {
             getString(R.string.task_report_solved)
         } else {
             getString(R.string.task_report_unsolved)

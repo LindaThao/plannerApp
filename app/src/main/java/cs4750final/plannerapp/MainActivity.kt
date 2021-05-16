@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(),
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (currentFragment == null) {
-            val fragment = TaskListFragment.newInstance()
+            val fragment = TaskListFragment.newInstance(date)
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_container, fragment)
@@ -40,13 +40,14 @@ class MainActivity : AppCompatActivity(),
             .commit()
     }
 
-    companion object {
-        fun newIntent(packageContext: Context, selectedDate: String):
-                Intent {
-            return Intent(packageContext,
-                    MainActivity::class.java).apply {
-                putExtra(SELECTED_DATE, selectedDate)
-            }
-        }
-    }
+    //edited by Linda
+//    companion object {
+//        fun newIntent(packageContext: Context, selectedDate: String):
+//                Intent {
+//            return Intent(packageContext,
+//                    MainActivity::class.java).apply {
+//                putExtra(SELECTED_DATE, selectedDate)
+//            }
+//        }
+//    }
 }

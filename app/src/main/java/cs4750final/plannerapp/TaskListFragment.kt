@@ -2,7 +2,10 @@ package cs4750final.plannerapp
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
@@ -11,6 +14,7 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,13 +25,16 @@ import java.util.*
 
 private const val TAG = "TaskListFragment"
 private const val SAVED_SUBTITLE_VISIBLE = "subtitle"
+private const val ARG_DATE = "date"
 
 class TaskListFragment : Fragment() {
 
     private lateinit var taskRecyclerView: RecyclerView
     private var adapter: TaskAdapter? = TaskAdapter(emptyList())
+
+
     private val taskListViewModel: TaskListViewModel by lazy {
-        ViewModelProviders.of(this).get(TaskListViewModel::class.java)
+        ViewModelProviders.of(this).get("date", TaskListViewModel::class.java)
     }
     private var callbacks
             : Callbacks? = null
@@ -144,7 +151,7 @@ class TaskListFragment : Fragment() {
             dateTextView.text = timeString
 //            solvedCheckbox.isChecked  = false
 //            solvedImageView.visibility =
-            if (task.isSolved) {
+            if (task.isCompleted) {
 //                solvedCheckbox.isChecked = true
                 titleTextView.paintFlags = titleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 dateTextView.paintFlags = dateTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -190,6 +197,15 @@ class TaskListFragment : Fragment() {
         override fun getItemCount() = tasks.size
     }
 
+//    companion object {
+//        const val ARG_NAME = "selectedDate"
+//
+//        fun newInstance(): TaskListFragment {
+//            return TaskListFragment()
+//        }
+
+
+//   Testing this code to see if it can connect two sides (calendar and selected date) - Pending
     companion object {
         const val ARG_NAME = "selectedDate"
 
@@ -197,26 +213,30 @@ class TaskListFragment : Fragment() {
             return TaskListFragment()
         }
 
-
-//   Testing this code to see if it can connect two sides (calendar and selected date) - Pending
-//    companion object {
-//        const val ARG_NAME = "selectedDate"
+//    fun newInstance(date: Date): TaskListFragment {
 //
-//        fun newInstance(): TaskListFragment {
-//            return TaskListFragment()
+//        val fragment = TaskListFragment()
+//
+//        val bundle = Bundle().apply {
+//            putSerializable(ARG_DATE, date)
 //        }
 //
-//        fun newInstance(selectedDate: String?): TaskListFragment {
-//            val fragment = TaskListFragment()
+//        fragment.arguments = bundle
 //
-//            val bundle = Bundle().apply {
-//                putString(ARG_NAME, selectedDate)
-//            }
-//
-//            fragment.arguments = bundle
-//
-//            return fragment
+//        return fragment
 //        }
 //    }
+
+        fun newInstance(selectedDate: String?): TaskListFragment {
+            val fragment = TaskListFragment()
+
+            val bundle = Bundle().apply {
+                putString(ARG_NAME, selectedDate)
+            }
+
+            fragment.arguments = bundle
+
+            return fragment
+        }
     }
 }

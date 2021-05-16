@@ -12,7 +12,7 @@
     <string name="motivation_quote">"Because the ones who are crazy enough to think that they can change the world are the ones who do"    - Steve Jobs</string>
     <string name="new_task">New Task</string>
     <string name="task_suspect_text">Choose Suspect</string>
-    <string name="task_report_text">Send Task Report</string>
+    <string name="task_report_text">Share Photo</string>
     <string name="task_report">%1$s!
         The task was discovered on %2$s. %3$s, and %4$s
     </string>

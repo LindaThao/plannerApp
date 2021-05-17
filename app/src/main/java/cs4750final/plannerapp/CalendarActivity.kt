@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.CalendarView
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
 
 private const val REQUEST_CODE_CHEAT = 0
 
@@ -22,9 +21,7 @@ class CalendarActivity : AppCompatActivity(){
             val date = "$temp/$dayOfMonth/$year"
             val intent = Intent(this@CalendarActivity, MainActivity::class.java)
             intent.putExtra("date", date)
-
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_CHEAT)
         }
     }
-
 }

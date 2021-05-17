@@ -1,7 +1,5 @@
 package cs4750final.plannerapp
 
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity(),
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (currentFragment == null) {
-            val fragment = TaskListFragment.newInstance(date)
+            val fragment = TaskListFragment.newInstance()
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_container, fragment)
@@ -40,14 +38,5 @@ class MainActivity : AppCompatActivity(),
             .commit()
     }
 
-    //edited by Linda
-//    companion object {
-//        fun newIntent(packageContext: Context, selectedDate: String):
-//                Intent {
-//            return Intent(packageContext,
-//                    MainActivity::class.java).apply {
-//                putExtra(SELECTED_DATE, selectedDate)
-//            }
-//        }
-//    }
+    
 }

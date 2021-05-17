@@ -2,10 +2,7 @@ package cs4750final.plannerapp
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
@@ -14,7 +11,6 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -31,10 +27,8 @@ class TaskListFragment : Fragment() {
 
     private lateinit var taskRecyclerView: RecyclerView
     private var adapter: TaskAdapter? = TaskAdapter(emptyList())
-
-
     private val taskListViewModel: TaskListViewModel by lazy {
-        ViewModelProviders.of(this).get("date", TaskListViewModel::class.java)
+        ViewModelProviders.of(this).get(TaskListViewModel::class.java)
     }
     private var callbacks
             : Callbacks? = null
@@ -151,7 +145,7 @@ class TaskListFragment : Fragment() {
             dateTextView.text = timeString
 //            solvedCheckbox.isChecked  = false
 //            solvedImageView.visibility =
-            if (task.isCompleted) {
+            if (task.isSolved) {
 //                solvedCheckbox.isChecked = true
                 titleTextView.paintFlags = titleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 dateTextView.paintFlags = dateTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -213,30 +207,29 @@ class TaskListFragment : Fragment() {
             return TaskListFragment()
         }
 
-//    fun newInstance(date: Date): TaskListFragment {
-//
-//        val fragment = TaskListFragment()
-//
-//        val bundle = Bundle().apply {
-//            putSerializable(ARG_DATE, date)
-//        }
-//
-//        fragment.arguments = bundle
-//
-//        return fragment
-//        }
-//    }
+    fun newInstance(date: Date): TaskListFragment {
 
-        fun newInstance(selectedDate: String?): TaskListFragment {
-            val fragment = TaskListFragment()
+        val fragment = TaskListFragment()
 
-            val bundle = Bundle().apply {
-                putString(ARG_NAME, selectedDate)
-            }
+        val bundle = Bundle().apply {
+            putSerializable(ARG_DATE, date)
+        }
 
-            fragment.arguments = bundle
+        fragment.arguments = bundle
 
-            return fragment
+        return fragment
         }
     }
-}
+
+//        fun newInstance(selectedDate: String?): TaskListFragment {
+//            val fragment = TaskListFragment()
+//
+//            val bundle = Bundle().apply {
+//                putString(ARG_NAME, selectedDate)
+//            }
+//
+//            fragment.arguments = bundle
+//
+//            return fragment
+//        }
+    }

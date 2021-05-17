@@ -10,7 +10,7 @@ data class Task(@PrimaryKey
                 var title: String = "",
                 var details: String = "",
                 var date: Date = Date(),
-                var isCompleted: Boolean = false,
+                var isSolved: Boolean = false,
                 var isPriority: Boolean = false,
                 var suspect: String = ""
 //    var requiresPolice: Boolean = false

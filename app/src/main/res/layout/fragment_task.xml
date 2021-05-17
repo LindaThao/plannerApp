@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -34,61 +33,32 @@
                 android:src="@android:drawable/ic_menu_camera"/>
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout2"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="163dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/textView2"
                 style="?android:listSeparatorTextViewStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="casual"
                 android:text="@string/daily_challenge_label"
                 android:textAlignment="center"
-                android:textColor="#2196F3"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.178"
-                app:layout_constraintVertical_chainStyle="packed" />
+                android:textColor="#2196F3" />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="casual"
                 android:text="@string/daily_challenge_instructions"
                 android:textAlignment="center"
-                android:textColor="#673AB7"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.308" />
-
-            <Button
-                android:id="@+id/task_report"
-                android:layout_width="193dp"
-                android:layout_height="36dp"
-                android:fontFamily="casual"
-                android:text="@string/task_report_text"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                app:iconTint="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:layout_constraintVertical_bias="0.872" />
+                android:textColor="#673AB7" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
@@ -98,7 +68,6 @@
         android:fontFamily="casual"
         android:text="@string/task_title_label"
         android:textAlignment="viewStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#2196F3"
         android:textStyle="bold" />
 
@@ -106,8 +75,7 @@
         android:id="@+id/task_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="serif-monospace"
-        android:hint="@string/task_title_hint" />
+        android:hint="@string/task_title_hint"/>
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -115,17 +83,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:text="@string/task_details_label"
-        android:textAlignment="viewStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#2196F3"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/task_detail"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:fontFamily="serif-monospace"
-        android:hint="@string/task_detail_notes" />
+        android:layout_height="50dp"
+        android:hint="@string/task_detail_notes"/>
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -133,8 +98,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:text="@string/due_date_label"
-        android:textAlignment="viewStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#2196F3"
         android:textStyle="bold" />
 
@@ -142,43 +105,29 @@
         android:id="@+id/task_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="casual"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:iconTint="#FFFFFF"
-        app:rippleColor="#FFFFFF"
-        tools:text="Wed Nov 14 11:56 EST 2018" />
+        tools:text="Wed Nov 14 11:56 EST 2018"/>
 
-    <!--    <Button-->
+    <CheckBox
+        android:id="@+id/task_solved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/task_completed_label"/>
+
+    <CheckBox
+        android:id="@+id/priority_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/priority_task_label"/>
+
+<!--    <Button-->
 <!--        android:id="@+id/task_suspect"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="@string/task_suspect_text"/>-->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
-
-        <CheckBox
-            android:id="@+id/priority_task"
-            android:layout_width="202dp"
-            android:layout_height="wrap_content"
-            android:text="@string/priority_task_label"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <CheckBox
-            android:id="@+id/task_solved"
-            android:layout_width="182dp"
-            android:layout_height="wrap_content"
-            android:text="@string/task_completed_label"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/priority_task"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+<!--    <Button-->
+<!--        android:id="@+id/task_report"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/task_report_text"/>-->
 </LinearLayout>

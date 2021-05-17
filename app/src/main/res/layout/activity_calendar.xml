@@ -13,14 +13,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTint="#FFFFFF">
+        android:layout_height="match_parent">
 
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="382dp"
             android:layout_height="wrap_content"
-            android:dateTextAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.448"
@@ -35,8 +33,8 @@
             android:fontFamily="cursive"
             android:text="@string/motivation_quote"
             android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="23sp"
+            android:textColor="#0B0B0B"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/calendarView"
             app:layout_constraintEnd_toEndOf="parent"

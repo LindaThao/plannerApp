@@ -1,7 +1,6 @@
 package cs4750final.plannerapp
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import androidx.room.migration.Migration
@@ -32,7 +31,6 @@ class TaskRepository private constructor(context: Context) {
     fun getTask(id: UUID): LiveData<Task?> = taskDao.getTask(id)
     //Method that employs the query that searches for tasks on a specific date in task dao
     fun getTaskByDate(date: Date): LiveData<List<Task>> = taskDao.getTaskByDate(date)
-
     fun updateTask(task: Task) {
         executor.execute {
             taskDao.updateTask(task)

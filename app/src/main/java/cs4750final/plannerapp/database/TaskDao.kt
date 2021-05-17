@@ -10,7 +10,7 @@ import java.util.*
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM task ORDER BY NOT isCompleted DESC, date")
+    @Query("SELECT * FROM task ORDER BY NOT isSolved DESC, date")
     fun getTasks(): LiveData<List<Task>>
 
     @Query("SELECT * FROM task WHERE id=(:id)")
